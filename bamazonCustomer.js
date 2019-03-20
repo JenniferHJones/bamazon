@@ -64,7 +64,7 @@ function displayInventory() {
                             displayInventory();
                         })
                 } else {
-                    console.log('Sorry, inventory is insufficient to meet your order.');
+                    console.log('Sorry, inventory is not sufficient to meet your order.');
                 }
             });
         connection.end();

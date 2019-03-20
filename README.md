@@ -7,9 +7,10 @@ ___
 1. If necessary, install MySQL on your machine
 2. Clone bamazon
 3. Run NPM Install for the following dependencies
-    * MySQL
+    * Console.table
     * Inquirer
-    
+    * MySQL
+
 ## User Interface
 1. Navigate to where bamazon app is saved, then enter `node bamazonCustomer.js`. 
 2. User will see the store's current inventory. 
@@ -18,6 +19,7 @@ ___
 
 ## Technology
 * Node.js
+* NPM console.table
 * NPM MySQL
 * NPM Inquirer
 * JavaScript
