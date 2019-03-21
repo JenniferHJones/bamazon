@@ -22,7 +22,9 @@ function displayInventory() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         // ask user which product they want to buy
+        console.log('\n');
         console.table(results);
+        console.log('\n');
         inquirer
             .prompt([
                 {
@@ -50,23 +52,23 @@ function displayInventory() {
                     
                     console.log(`Congratulations! You bought ${answer.units} ${item.product_name} for $${cost}`);
 
-                    connection.query("UPDATE products SET ? WHERE ?"
+                    connection.query("UPDATE products SET ? WHERE ?",
                     [
                         {
-                            stock_quantity: stock_quantity - answer.units
+                            stock_quantity: item.stock_quantity - answer.units
                         },
                         {
                             item_id: answer.choice
                         }
                     ],
-                        function (error) {
-                            if (error) throw error;
+                        function (err) {
+                            if (err) throw err;
                             displayInventory();
                         })
                 } else {
                     console.log('Sorry, inventory is not sufficient to meet your order.');
+                    displayInventory();
                 }
             });
-        connection.end();
     });
 }

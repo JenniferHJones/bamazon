@@ -33,7 +33,7 @@ function start() {
                 viewLowInventory();
             } else if (answer.action === "Add to Inventory") {
                 addInventory();
-            } else if (answer.action === "Add to Inventory") {
+            } else if (answer.action === "Add New Product") {
                 addProduct();
             } else if (answer.action === "EXIT") {
                 connection.end();
@@ -47,9 +47,10 @@ function start() {
 function viewProducts() {
     connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function (err, results) {
         if (err) throw err;
+        console.log('\n');
         console.table(results);
+        console.log('\n');
         start();
-        connection.end();
     });
 };
 
@@ -59,7 +60,6 @@ function viewLowInventory() {
         if (err) throw err;
         console.table(results);
         start();
-        connection.end();
     });
 };
 
@@ -83,18 +83,75 @@ function addInventory() {
                 }
             ])
             .then(function (answer) {
-                // get the information for the chosen item
                 var item;
                 for (var i = 0; i < results.length; i++) {
                     if (results[i].item_id === parseInt(answer.choice)) {
                         item = results[i];
                     }
                 }
+                console.log(`The ${item.product_name} inventory was updated.`);
+
+                connection.query("UPDATE products SET ? WHERE ?",
+                    [
+                        {
+                            stock_quantity: item.stock_quantity + parseInt(answer.units)
+                        },
+                        {
+                            item_id: answer.choice
+                        }
+                    ],
+                    function (err) {
+                        if (err) throw err;
+                        start();
+                    })
             })
     })
 };
 
-    // function to allow user to add new product to inventory
-    function addProduct() {
+// function to allow user to add new product to inventory
+function addProduct() {
+    connection.query("SELECT * FROM products", function (err, results) {
+        if (err) throw err;
+        // ask user to add product details
+        inquirer
+            .prompt([
+                {
+                    name: "newProduct",
+                    type: "input",
+                    message: "What product would you like to add?"
+                },
+                {
+                    name: "department",
+                    type: "list",
+                    message: "What department does this product belong to?",
+                    choices: ["Books", "Electronics", "Gardening", "Housewares", "Kitchen"]
+                },
+                {
+                    name: "price",
+                    type: "input",
+                    message: "What price do you want to assign this product?"
+                },
+                {
+                    name: "quantity",
+                    type: "input",
+                    message: "How many units do you want to add?"
+                }
+            ])
+            .then(function (answer) {
+               
+                console.log(`The inventory was updated.`);
 
-    };
+                connection.query("INSERT INTO products SET ?",
+                        {
+                            product_name: answer.newProduct,
+                            department_name: answer.department,
+                            price: answer.price,
+                            stock_quantity: answer.quantity
+                        },
+                    function (err) {
+                        if (err) throw err;
+                        start();
+                    })
+            })
+    })
+};
