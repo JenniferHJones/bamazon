@@ -45,7 +45,7 @@ function start() {
 
 // function to display all products for sale
 function viewProducts() {
-    connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function (err, results) {
+    connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         console.log('\n');
         console.table(results);
@@ -58,7 +58,9 @@ function viewProducts() {
 function viewLowInventory() {
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, results) {
         if (err) throw err;
+        console.log('\n');
         console.table(results);
+        console.log('\n');
         start();
     });
 };
@@ -68,7 +70,9 @@ function addInventory() {
     connection.query("SELECT * FROM products", function (err, results) {
         if (err) throw err;
         // ask user for which product they want to add units
+        console.log('\n');
         console.table(results);
+        console.log('\n');
         inquirer
             .prompt([
                 {
@@ -89,7 +93,9 @@ function addInventory() {
                         item = results[i];
                     }
                 }
+                console.log('\n');
                 console.log(`The ${item.product_name} inventory was updated.`);
+                console.log('\n');
 
                 connection.query("UPDATE products SET ? WHERE ?",
                     [
@@ -138,16 +144,16 @@ function addProduct() {
                 }
             ])
             .then(function (answer) {
-               
+                console.log('\n');
                 console.log(`The inventory was updated.`);
-
+                console.log('\n');
                 connection.query("INSERT INTO products SET ?",
-                        {
-                            product_name: answer.newProduct,
-                            department_name: answer.department,
-                            price: answer.price,
-                            stock_quantity: answer.quantity
-                        },
+                    {
+                        product_name: answer.newProduct,
+                        department_name: answer.department,
+                        price: answer.price,
+                        stock_quantity: answer.quantity
+                    },
                     function (err) {
                         if (err) throw err;
                         start();

@@ -14,8 +14,28 @@ var connection = mysql.createConnection({
 // connect to mysql server and sql database
 connection.connect(function (err) {
     if (err) throw err;
-    displayInventory();
+    start();
 });
+
+function start() {
+    inquirer
+        .prompt({
+            name: "action",
+            type: "list",
+            message: "What would you like to do?",
+            choices: ["View products for sale", "EXIT"]
+        })
+        .then(function (answer) {
+            // call specific function based on user response
+            if (answer.action === "View products for sale") {
+                displayInventory();
+            } else if (answer.action === "EXIT") {
+                connection.end();
+            } else {
+                connection.end();
+            }
+        });
+};
 
 // function to display inventory for user
 function displayInventory() {
@@ -49,21 +69,22 @@ function displayInventory() {
                 // determine if there is sufficient stock to fill order
                 if (item.stock_quantity >= parseInt(answer.units)) {
                     var cost = answer.units * item.price;
-                    
+                    console.log('\n');
                     console.log(`Congratulations! You bought ${answer.units} ${item.product_name} for $${cost}`);
+                    console.log('\n');
 
                     connection.query("UPDATE products SET ? WHERE ?",
-                    [
-                        {
-                            stock_quantity: item.stock_quantity - answer.units
-                        },
-                        {
-                            item_id: answer.choice
-                        }
-                    ],
+                        [
+                            {
+                                stock_quantity: item.stock_quantity - answer.units
+                            },
+                            {
+                                item_id: answer.choice
+                            }
+                        ],
                         function (err) {
                             if (err) throw err;
-                            displayInventory();
+                            start();
                         })
                 } else {
                     console.log('Sorry, inventory is not sufficient to meet your order.');
