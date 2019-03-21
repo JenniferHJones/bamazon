@@ -15,7 +15,7 @@ ___
 1. Navigate to where bamazon app is saved, then enter `node bamazonCustomer.js`
 
 2. User is asked what they want to do: View products for sale or EXIT
-![console example](/images/customerView-start.png)
+![console example](images/customerView-start.png)
 
 3. View products for sale - User sees current inventory and is asked two questions: 1. enter product ID for the item they want to buy and 2. how many units.
 ![console example](./images/customerView-buy.png)
