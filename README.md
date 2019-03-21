@@ -26,7 +26,7 @@ ___
 ## User Interface - Manager View
 1. Enter `node bamazonManager.js`.
 
-2. User asked what they want to do: (View Products for Sale, View Low Inventory, Add to Inventory, Add New Product, or EXIT).
+2. User asked to choose action: (View Products for Sale, View Low Inventory, Add to Inventory, Add New Product, or EXIT).
 ![console example](./images/managerStart.PNG)
 
 3. View Products for Sale - User sees current inventory & is asked what they want to do.
