@@ -24,7 +24,7 @@ ___
 ![console example](./images/customerView-final.png)
 
 ## User Interface - Manager View
-1. Navigate to where bamazon app is saved, then enter `node bamazonManager.js`
+1. Enter `node bamazonManager.js`
 
 2. User is asked what they want to do: View Products for Sale, View Low Inventory, Add to Inventory, Add New Product, or EXIT
 ![console example](./images/managerView-start.png)
@@ -43,12 +43,6 @@ ___
 
 7. User prompted to enter a price and then the number of units followed by confirmation that the inventory was updated; user is then asked what they want to do
 ![console example](./images/managerView-addProduct2.png)
-
-
-
-
-
-
 
 ## Technology
 * Node.js
