@@ -14,10 +14,10 @@ ___
 ## User Interface - Customer View
 1. Navigate to where bamazon app is saved, then enter `node bamazonCustomer.js`.
 
-2. User is asked what they want to do: View products for sale or EXIT.
+2. User asked what they want to do: (View products for sale or EXIT).
 ![console example](./images/customerStart.PNG)
 
-3. View products for sale - User sees current inventory and is asked two questions: 1. enter product ID for the item they want to buy and 2. how many units.
+3. View products for sale - User sees current inventory and is asked to enter product ID for the item they want to buy and enter how many units.
 ![console example](./images/customerBuy.PNG)
 
 4. App displays confirmation message that user bought desired number of product for total cost; user may then choose to make another purchase or EXIT.
@@ -26,7 +26,7 @@ ___
 ## User Interface - Manager View
 1. Enter `node bamazonManager.js`.
 
-2. User is asked what they want to do: View Products for Sale, View Low Inventory, Add to Inventory, Add New Product, or EXIT.
+2. User asked what they want to do: (View Products for Sale, View Low Inventory, Add to Inventory, Add New Product, or EXIT).
 ![console example](./images/managerStart.PNG)
 
 3. View Products for Sale - User sees current inventory & is asked what they want to do.
@@ -35,7 +35,7 @@ ___
 4. View Low Inventory - User only sees inventory for items with less than 5 units & is asked what they want to do.
 ![console example](./images/managerLowInventory.PNG)
 
-5. Add to Inventory - User sees current inventory and is asked two questions: 1. choose a product ID to add inventory and 2. how many units to add. User receives confirmation that product inventory was updated & is asked what they want to do.
+5. Add to Inventory - User sees current inventory and is asked to choose a product ID and then how many units to add. User receives confirmation that product inventory was updated & is asked what they want to do.
 ![console example](./images/managerAddInventory.PNG)
 
 6. Add New Product - User is asked what product they want to add followed by prompting user to choose a department.
