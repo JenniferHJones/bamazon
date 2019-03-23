@@ -87,8 +87,10 @@ function displayInventory() {
                             start();
                         })
                 } else {
+                    console.log('\n');
                     console.log('Sorry, inventory is not sufficient to meet your order.');
-                    displayInventory();
+                    console.log('\n');
+                    start();
                 }
             });
     });
